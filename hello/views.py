@@ -7,7 +7,7 @@ import requests
 
 # Create your views here.
 def index(request):
-    r= requests.get('http://httpbin.org/status/418')
+    r= requests.get('https://github.com/timeline.json')
     print r.text
     return HttpResponse('<pre>'+r.text+'</pre>')
     #return render(request, 'index.html')
