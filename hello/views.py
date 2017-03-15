@@ -14,14 +14,16 @@ def index(request):
       cur = conn.cursor()
       sql_command =""" 
     CREATE TABLE iotdpu_data(
-rank  integer NOT NULL,
-firstname  varchar(40) NOT NULL,
-lastname   varchar(40) NOT NULL,
-university  varchar(40) NOT NULL,
-degree   integer NOT NULL,
-department   varchar(40) NOT NULL,
-gpa   double NOT NULL,
-studyORwork  varchar(40) NOT NULL,) """
+    rank  integer NOT NULL,
+    firstname  varchar(40) NOT NULL,
+    lastname   varchar(40) NOT NULL,
+    university  varchar(40) NOT NULL,
+    degree   integer NOT NULL,
+    department   varchar(40) NOT NULL,
+    gpa   double NOT NULL,
+    studyORwork  varchar(40) NOT NULL,) """
+      cur.execute(sql_command)
+      conn.commit()
       r ="success"
     
     
