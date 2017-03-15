@@ -21,7 +21,7 @@ def index(request):
     degree   integer NOT NULL,
     department   varchar(40) NOT NULL,
     gpa   double NOT NULL,
-    studyORwork  varchar(40) NOT NULL,) """
+    studyORwork  varchar(40) NOT NULL) """
       cur.execute(sql_command)
       conn.commit()
       r ="success"
