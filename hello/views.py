@@ -13,13 +13,10 @@ def index(request):
       conn = psycopg2.connect("dbname='ds7gk4tphvn2v' user='sfszejfztqdxyo' host='ec2-23-21-220-23.compute-1.amazonaws.com' password='9e2b53c8d90e3f9ad12e7764ac7ecee875724c6d2f1d3ae3d31517ac4d88bddc'")
       cur = conn.cursor()
       sql_command =""" 
-    CREATE TABLE employee(
-  idmember INTEGER PRIMARY KEY,
-  fname VARCHAR(40),
-  lname VARCHAR(40),
-  gender CHAR(1),
-  joining DATE,
-  briyh_date DATE) """
+    CREATE TABLE line(
+  id INTEGER PRIMARY KEY,
+  temp VARCHAR(40),
+  date DATE)"""
       cur.execute(sql_command)
       conn.commit()
       r ="success"
