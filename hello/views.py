@@ -5,7 +5,7 @@ from .models import Greeting
 import psycopg2
 import requests
 
-# Create your views here.
+# Create your views here
 
 
 def index(request):
