@@ -68,6 +68,7 @@ def getdata(request):
     if row is None:
         resBody = "No Data found"
         return HttpResponse(resBody)
+    idPic = row[0]
     humidity = row[1]
     picture = row[2]
     try:
@@ -99,6 +100,7 @@ def getdata(request):
         "weather":row[2],
         "pressure":row[3],
         "humidity":humidity,
+        "id_picture":idPic,
         "picture":picture
     }
     jsonData = json.dumps(row)
