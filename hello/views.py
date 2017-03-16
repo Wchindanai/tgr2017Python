@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
 
 from .models import TGR2017
 import json
@@ -17,7 +17,7 @@ def index(request):
     return HttpResponse(r)
     # return render(request, 'index.html')
 
-@csrf_exempt
+# @csrf_exempt
 def postdata(request):
     if request.method == 'POST':
         param = request.POST
