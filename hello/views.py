@@ -71,11 +71,9 @@ def getdata(request):
     except:
         print "error select max"
     row = cur.fetchone()
-    if row is None:
+    id = row[0]
+    if id is None:
         id = 1
-    # id = row[0]
-    # if id is None:
-    #     id = 1
     try:
         sql = """INSERT INTO tgr2017 VALUES (%s, %s, %s, %s)"""
         cur.execute(sql,(id+1,temperature, weather, pressure))
