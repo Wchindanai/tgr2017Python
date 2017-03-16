@@ -33,6 +33,7 @@ def postdata(request):
         try:
             sql = """UPDATE hardware SET picture = %s WHERE id = %s"""
             cur.execute(sql,(picture, id))
+            conn.commit()
         except psycopg2.Error as e:
             print e.pgerror
         cur.close()
