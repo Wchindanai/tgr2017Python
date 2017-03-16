@@ -23,7 +23,7 @@ def getdata(request):
     response = requests.get('http://api.wunderground.com/api/12b2d3c7265fb166/conditions/q/TH/Bangkok.json')
     jsonGetData = response.json()
     temperature = jsonGetData["current_observation"]["temp_c"]
-    pressure = jsonGetData["current_observation"]["pressure_in"]
+    pressure = jsonGetData["current_observation"]["pressure_mb"]
     weather = jsonGetData["current_observation"]["weather"]
     try:
         conn = psycopg2.connect("dbname='de1120l2joq0tl' user='iblwvhvainfqbk' host='ec2-75-101-142-182.compute-1.amazonaws.com' password='d3cc75b395f3c484f93693e377087b6d9e2db7f3153f6274809bab91695c1433'")
