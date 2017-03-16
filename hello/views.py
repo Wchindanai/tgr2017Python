@@ -7,11 +7,6 @@ import psycopg2
 import requests
 import base64
 
-# Create your views here
-img = open("./hello/src/test.jpg",'r').read()
-encodeImg = base64.b64encode(img)
-del img
-
 def index(request):
     try:
       conn = psycopg2.connect("dbname='de1120l2joq0tl' user='iblwvhvainfqbk' host='ec2-75-101-142-182.compute-1.amazonaws.com' password='d3cc75b395f3c484f93693e377087b6d9e2db7f3153f6274809bab91695c1433'")
@@ -31,19 +26,32 @@ def getdata(request):
         conn = psycopg2.connect("dbname='de1120l2joq0tl' user='iblwvhvainfqbk' host='ec2-75-101-142-182.compute-1.amazonaws.com' password='d3cc75b395f3c484f93693e377087b6d9e2db7f3153f6274809bab91695c1433'")
     except:
         print "error"
-
     cur = conn.cursor()
+    try:
+        sql = """SELECT * FROM hardware ORDER BY id DESC LIMIT 1"""
+        cur.execute(sql)
+    except:
+        print "ERROR query from hardware"
+    row = cur.fetchone()
+    if(row == 0):
+        resBody = "No Data found"
+        return HttpResponse(resBody)
+    humidity = row[1]
+    picture = row[2]
     try:
         sql = """SELECT MAX(id) FROM tgr2017"""
         cur.execute(sql)
     except:
         print "error select max"
     row = cur.fetchone()
+    if row is None:
+        id = 1
     id = row[0]
-    print "id:",id
+    if id is None:
+        id = 1
     try:
-        sql = """INSERT INTO tgr2017 VALUES (%s, %s, %s, %s, %s, %s)"""
-        cur.execute(sql,(id+1,temperature, weather, pressure, 'test', encodeImg))
+        sql = """INSERT INTO tgr2017 VALUES (%s, %s, %s, %s)"""
+        cur.execute(sql,(id+1,temperature, weather, pressure))
         conn.commit()
     except psycopg2.Error as e:
         print e.pgerror
@@ -60,8 +68,8 @@ def getdata(request):
         "temperature":row[1],
         "weather":row[2],
         "pressure":row[3],
-        "humidity":row[4],
-        "picture":row[5]
+        "humidity":humidity,
+        "picture":picture
     }
     jsonData = json.dumps(row)
     print jsonData
