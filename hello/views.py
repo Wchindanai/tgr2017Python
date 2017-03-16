@@ -8,7 +8,9 @@ import requests
 import base64
 
 # Create your views here
-
+img = open("./hello/src/test.jpg",'r').read()
+encodeImg = base64.b64encode(img)
+del img
 
 def index(request):
     try:
@@ -41,7 +43,7 @@ def getdata(request):
     print "id:",id
     try:
         sql = """INSERT INTO tgr2017 VALUES (%s, %s, %s, %s, %s, %s)"""
-        cur.execute(sql,(id+1,temperature, weather, pressure, 'test', 'test'))
+        cur.execute(sql,(id+1,temperature, weather, pressure, 'test', encodeImg))
         conn.commit()
     except psycopg2.Error as e:
         print e.pgerror
