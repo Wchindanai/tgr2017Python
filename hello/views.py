@@ -52,6 +52,7 @@ def getdata(request):
     temperature = jsonGetData["current_observation"]["temp_c"]
     pressure = jsonGetData["current_observation"]["pressure_mb"]
     weather = jsonGetData["current_observation"]["weather"]
+    relative_humidity = jsonGetData["current_observation"]["relative_humidity"]
     ts = time.time()
     date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     try:
@@ -101,7 +102,8 @@ def getdata(request):
         "pressure":row[3],
         "humidity":humidity,
         "id_picture":idPic,
-        "picture":picture
+        "picture":picture,
+        "relative_humidity":relative_humidity
     }
     jsonData = json.dumps(row)
     print jsonData
